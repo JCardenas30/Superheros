@@ -17,12 +17,12 @@ abstract class BaseFragmentDataBinding<V: ViewModel, T: ViewDataBinding>: Fragme
     abstract fun getLayout(): Int
     abstract fun getViewModelClass(): Class<V>
     abstract fun bindViewToModel()
-    abstract fun setupUI()
+    abstract fun initComponents()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, getLayout(), container, false)
         viewModel = ViewModelProvider(this).get(getViewModelClass())
-        setupUI()
+        initComponents()
         bindViewToModel()
         binding.lifecycleOwner = this
         binding.executePendingBindings()

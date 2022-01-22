@@ -4,7 +4,11 @@ buildscript {
         navVersion = '2.3.5'
         retrofitVersion = '2.9.0'
         glideVersion = '4.12.0'
-        roomVersion = "2.4.0"
+        roomVersion = "2.4.1"
+        moshiVersion = '1.10.0'
+        okhttpVersion = '4.9.0'
+        okhttpLoggingIterceptorVersion = '3.12.1'
+        retrofitMoshiConverterVersion = '2.9.0'
     }
 
     repositories {

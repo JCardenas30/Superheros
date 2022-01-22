@@ -10,7 +10,7 @@ class HeroDetailFragment: BaseFragmentDataBinding<HeroDetailViewModel, FragmentH
     override fun getViewModelClass(): Class<HeroDetailViewModel> = HeroDetailViewModel::class.java
     override fun bindViewToModel() { binding.viewModel = viewModel }
 
-    override fun setupUI() {
+    override fun initComponents() {
 
     }
 }
