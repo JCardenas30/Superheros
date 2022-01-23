@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 
 object ServiceLocator {
     private var database: HeroDatabase? = null
-    private val baseUrl = "${BuildConfig.BASE_URL}${BuildConfig.ACCESS_TOKEN}"
+    private val baseUrl = "${BuildConfig.BASE_URL}${BuildConfig.ACCESS_TOKEN}/"
     private val heroModule: HeroModule by lazy {
         HeroModule()
     }

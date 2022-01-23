@@ -1,11 +1,12 @@
 package com.jcardenas.superheros.domain.repositories
 
+import androidx.lifecycle.LiveData
 import com.jcardenas.superheros.domain.common.Result
 import com.jcardenas.superheros.domain.entities.Hero
 import kotlinx.coroutines.flow.Flow
 
 interface HeroRepository {
-    suspend fun getRemoteHero(id: Int): Result<Hero>
+    fun getRemoteHero(id: Int, response: (result: Result<Hero>) -> Unit)
     suspend fun getHeroById(id: Int): Flow<Hero>
-    suspend fun insert(hero: Hero)
+    suspend fun insert(heros: List<Hero>)
 }

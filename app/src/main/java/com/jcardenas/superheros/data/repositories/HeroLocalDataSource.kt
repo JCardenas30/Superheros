@@ -4,6 +4,6 @@ import com.jcardenas.superheros.domain.entities.Hero
 import kotlinx.coroutines.flow.Flow
 
 interface HeroLocalDataSource {
-    suspend fun insert(hero: Hero)
+    suspend fun insert(heros: List<Hero>)
     suspend fun getHero(heroId: Int): Flow<Hero>
 }

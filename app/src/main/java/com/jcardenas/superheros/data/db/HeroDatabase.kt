@@ -11,7 +11,7 @@ import com.jcardenas.superheros.data.entities.HeroEntity
     entities = [
         HeroEntity::class
     ],
-    version = BuildConfig.VERSION_CODE,
+    version = 1,
     exportSchema = false
 )
 abstract class HeroDatabase: RoomDatabase() {
@@ -27,7 +27,7 @@ abstract class HeroDatabase: RoomDatabase() {
             if (tempInstance != null) return tempInstance
             synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context, HeroDatabase::class.java,
+                    context.applicationContext, HeroDatabase::class.java,
                     HeroDatabase::class.java.simpleName
                 ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance

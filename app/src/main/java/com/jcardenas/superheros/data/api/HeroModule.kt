@@ -1,6 +1,7 @@
 package com.jcardenas.superheros.data.api
 
 import android.util.Log
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.jcardenas.superheros.BuildConfig
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

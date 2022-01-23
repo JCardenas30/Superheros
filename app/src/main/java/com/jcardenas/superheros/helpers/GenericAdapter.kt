@@ -7,6 +7,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.jcardenas.superheros.BR
 
 class GenericAdapter<T : ListItemViewModel>(@LayoutRes val layoutId: Int) :
     RecyclerView.Adapter<GenericAdapter.GenericViewHolder<T>>() {
@@ -75,8 +76,8 @@ class GenericAdapter<T : ListItemViewModel>(@LayoutRes val layoutId: Int) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(itemViewModel: T) {
-            //binding.setVariable(BR.itemViewModel, itemViewModel)
-            //binding.executePendingBindings()
+            binding.setVariable(BR.itemViewModel, itemViewModel)
+            binding.executePendingBindings()
         }
 
     }

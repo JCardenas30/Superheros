@@ -16,6 +16,4 @@ class HeroApplication: Application() {
     val getLocalHeroUseCase: GetLocalHeroUseCase
         get() = GetLocalHeroUseCase(heroRepository)
 
-
-
 }

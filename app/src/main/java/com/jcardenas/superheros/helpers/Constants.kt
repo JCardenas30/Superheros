@@ -1,5 +1,6 @@
 package com.jcardenas.superheros.helpers
 
 object Constants {
-    const val MAX_CHARACTER_ID = 731
+    const val HEROS_TO_GET = 20
+    const val MAX_CHARACTER_ID = 732
 }
