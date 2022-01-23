@@ -11,6 +11,7 @@
     </data>
 
     <androidx.cardview.widget.CardView
+        android:onClick='@{(v)-> itemViewModel.onListItemViewClickListener.onClick(v, itemViewModel.adapterPosition) }'
         android:layout_width="match_parent"
         android:layout_margin="@dimen/margin_default"
         android:layout_height="@dimen/card_height"
@@ -22,25 +23,25 @@
 
             <ImageView
                 android:id="@+id/heroImage"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/content_image_hero"
                 android:src="@{itemViewModel.image}"
+                android:scaleType="centerCrop"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintWidth_percent="0.4"
                 />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_default"
                 android:textSize="@dimen/hero_name_font_size"
                 android:textStyle="bold"
                 android:text="@{itemViewModel.name}"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/heroImage"/>
+                android:textColor="@android:color/white"
+                android:background="@color/black_50"
+                android:padding="@dimen/padding_default"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

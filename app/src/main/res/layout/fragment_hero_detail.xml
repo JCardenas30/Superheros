@@ -1,15 +1,524 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="viewModel"
             type="com.jcardenas.superheros.viewmodel.HeroDetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="280dp">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:theme="@style/ThemeOverlay.AppCompat.DayNight"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleMarginEnd="64dp"
+                app:expandedTitleMarginStart="48dp"
+                app:expandedTitleTextColor="@android:color/white"
+                app:collapsedTitleTextColor="@android:color/white"
+                app:expandedTitleTextAppearance="@style/ExpandedAppBar"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <ImageView
+                    android:scaleType="centerCrop"
+                    android:src="@{viewModel.heroLiveData.image}"
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp"
+                    android:contentDescription="@string/content_image_hero"
+                    app:layout_collapseMode="parallax"/>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:theme="@style/ToolbarTheme"/>
+
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/padding_default"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    app:cardCornerRadius="@dimen/card_corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/Title"
+                            android:id="@+id/lblTitle"
+                            android:text="@string/biography"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblFullName"
+                            android:text="@string/full_name"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblTitle"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:id="@+id/txtFullName"
+                            android:text="@{` ` + viewModel.heroLiveData.fullName}"
+                            app:layout_constraintLeft_toRightOf="@id/lblFullName"
+                            app:layout_constraintTop_toBottomOf="@id/lblTitle"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblAlterEgos"
+                            android:text="@string/alter_egos"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblFullName"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:id="@+id/txtAlterEgos"
+                            android:text="@{` ` + viewModel.heroLiveData.alterEgos}"
+                            app:layout_constraintLeft_toRightOf="@id/lblAlterEgos"
+                            app:layout_constraintTop_toBottomOf="@id/lblFullName"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblAliases"
+                            android:text="@string/aliases"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblAlterEgos"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:id="@+id/txtAliases"
+                            android:text="@{` ` + viewModel.heroLiveData.aliases}"
+                            app:layout_constraintLeft_toRightOf="@id/lblAliases"
+                            app:layout_constraintTop_toBottomOf="@id/lblAlterEgos"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblPlaceOfBirth"
+                            android:text="@string/place_of_birth"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/txtAliases"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:id="@+id/txtPlaceOfBirth"
+                            android:text="@{` ` + viewModel.heroLiveData.placeOfBirth}"
+                            app:layout_constraintLeft_toRightOf="@id/lblPlaceOfBirth"
+                            app:layout_constraintTop_toBottomOf="@id/txtAliases"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblFirstAppearance"
+                            android:text="@string/first_appearance"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblPlaceOfBirth"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:id="@+id/txtFirstAppearance"
+                            android:text="@{` ` + viewModel.heroLiveData.firstAppearance}"
+                            app:layout_constraintLeft_toRightOf="@id/lblFirstAppearance"
+                            app:layout_constraintTop_toBottomOf="@id/lblPlaceOfBirth"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblPublisher"
+                            android:text="@string/publisher"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/txtFirstAppearance"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.publisher}"
+                            app:layout_constraintLeft_toRightOf="@id/lblPublisher"
+                            app:layout_constraintTop_toBottomOf="@id/txtFirstAppearance"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblAlignment"
+                            android:text="@string/alignment"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblPublisher"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.alignment}"
+                            android:layout_marginBottom="@dimen/font_margin_default"
+                            app:layout_constraintLeft_toRightOf="@id/lblAlignment"
+                            app:layout_constraintTop_toBottomOf="@id/lblPublisher"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_marginTop="@dimen/margin_default"
+                    app:cardCornerRadius="@dimen/card_corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/Title"
+                            android:id="@+id/lblPowerstats"
+                            android:text="@string/powerstats"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblIntelligence"
+                            android:text="@string/intelligence"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblPowerstats"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.intelligence}"
+                            app:layout_constraintLeft_toRightOf="@id/lblIntelligence"
+                            app:layout_constraintTop_toBottomOf="@id/lblPowerstats"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblStrength"
+                            android:text="@string/strength"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblIntelligence"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.strength}"
+                            app:layout_constraintLeft_toRightOf="@id/lblStrength"
+                            app:layout_constraintTop_toBottomOf="@id/lblIntelligence"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblSpeed"
+                            android:text="@string/speed"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblStrength"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.speed}"
+                            app:layout_constraintLeft_toRightOf="@id/lblSpeed"
+                            app:layout_constraintTop_toBottomOf="@id/lblStrength"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblDurability"
+                            android:text="@string/durability"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblSpeed"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.durability}"
+                            app:layout_constraintLeft_toRightOf="@id/lblDurability"
+                            app:layout_constraintTop_toBottomOf="@id/lblSpeed"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblPower"
+                            android:text="@string/first_appearance"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblDurability"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.power}"
+                            app:layout_constraintLeft_toRightOf="@id/lblPower"
+                            app:layout_constraintTop_toBottomOf="@id/lblDurability"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblCombat"
+                            android:text="@string/publisher"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblPower"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.publisher}"
+                            android:layout_marginBottom="@dimen/font_margin_default"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toRightOf="@id/lblCombat"
+                            app:layout_constraintTop_toBottomOf="@id/lblPower"/>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_marginTop="@dimen/margin_default"
+                    app:cardCornerRadius="@dimen/card_corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/Title"
+                            android:id="@+id/lblAppearance"
+                            android:text="@string/appearance"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblGender"
+                            android:text="@string/intelligence"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblAppearance"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.gender}"
+                            app:layout_constraintLeft_toRightOf="@id/lblGender"
+                            app:layout_constraintTop_toBottomOf="@id/lblAppearance"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblRace"
+                            android:text="@string/strength"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblGender"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.strength}"
+                            app:layout_constraintLeft_toRightOf="@id/lblRace"
+                            app:layout_constraintTop_toBottomOf="@id/lblGender"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblHeight"
+                            android:text="@string/speed"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblRace"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.height}"
+                            app:layout_constraintLeft_toRightOf="@id/lblHeight"
+                            app:layout_constraintTop_toBottomOf="@id/lblRace"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblWeight"
+                            android:text="@string/durability"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblHeight"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.weight}"
+                            app:layout_constraintLeft_toRightOf="@id/lblWeight"
+                            app:layout_constraintTop_toBottomOf="@id/lblHeight"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblEyeColor"
+                            android:text="@string/first_appearance"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblWeight"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.eyeColor}"
+                            app:layout_constraintLeft_toRightOf="@id/lblEyeColor"
+                            app:layout_constraintTop_toBottomOf="@id/lblWeight"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblHairColor"
+                            android:text="@string/publisher"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblEyeColor"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.hairColor}"
+                            android:layout_marginBottom="@dimen/font_margin_default"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toRightOf="@id/lblHairColor"
+                            app:layout_constraintTop_toBottomOf="@id/lblEyeColor"/>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_marginTop="@dimen/margin_default"
+                    app:cardCornerRadius="@dimen/card_corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/Title"
+                            android:id="@+id/lblWork"
+                            android:text="@string/work"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblOccupation"
+                            android:text="@string/occupation"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblWork"/>
+
+                        <TextView
+                            android:id="@+id/txtOccupation"
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.occupation}"
+                            app:layout_constraintLeft_toRightOf="@id/lblOccupation"
+                            app:layout_constraintTop_toBottomOf="@id/lblWork"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblBase"
+                            android:text="@string/base"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/txtOccupation"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.base}"
+                            android:layout_marginBottom="@dimen/font_margin_default"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toRightOf="@id/lblBase"
+                            app:layout_constraintTop_toBottomOf="@id/txtOccupation"/>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginBottom="@dimen/margin_default"
+                    app:cardCornerRadius="@dimen/card_corner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/Title"
+                            android:id="@+id/lblConnections"
+                            android:text="@string/connections"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblGroupAffiliation"
+                            android:text="@string/group_affiliation"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lblConnections"/>
+
+                        <TextView
+                            android:id="@+id/txtGroupAffiliation"
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.groupAffiliation}"
+                            app:layout_constraintLeft_toRightOf="@id/lblGroupAffiliation"
+                            app:layout_constraintTop_toBottomOf="@id/lblConnections"/>
+
+                        <TextView
+                            style="@style/ContentTitle"
+                            android:id="@+id/lblRelatives"
+                            android:text="@string/relatives"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/txtGroupAffiliation"/>
+
+                        <TextView
+                            style="@style/Content"
+                            android:text="@{` ` + viewModel.heroLiveData.relatives}"
+                            android:layout_marginBottom="@dimen/font_margin_default"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toRightOf="@id/lblRelatives"
+                            app:layout_constraintTop_toBottomOf="@id/txtGroupAffiliation"/>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

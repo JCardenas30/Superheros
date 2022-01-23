@@ -15,7 +15,7 @@ class HeroListViewModel: ViewModel() {
     private lateinit var getLocalHeroUseCase: GetLocalHeroUseCase
     private lateinit var getRemoteHeroUseCase: GetRemoteHeroUseCase
 
-    private val isLoading = MutableLiveData(true)
+    val isLoading = MutableLiveData(true)
     val remoteHeros = MutableLiveData<MutableList<Hero>>(mutableListOf())
 
     fun setHeroRemoteUseCase(heroRemoteHeroUseCase: GetRemoteHeroUseCase){
@@ -26,7 +26,16 @@ class HeroListViewModel: ViewModel() {
         this.getLocalHeroUseCase = localHeroUseCase
     }
 
-    fun getHeros(heroId: Int = 1, numberOfDownloaded: Int = 0){
+    fun getHeroes(){
+        var lastHeroId = if(remoteHeros.value?.isNotEmpty() == true)
+            remoteHeros.value?.last()!!.id + 1 else 1
+
+        remoteHeros.value?.clear()
+        getRecursiveHeros(lastHeroId)
+
+    }
+
+    fun getRecursiveHeros(heroId: Int = 1, numberOfDownloaded: Int = 0){
         if(heroId >= Constants.MAX_CHARACTER_ID || numberOfDownloaded >= Constants.HEROS_TO_GET) {
             //finish
             remoteHeros.value = remoteHeros.value
@@ -46,7 +55,7 @@ class HeroListViewModel: ViewModel() {
                 }
                 is Result.Error -> {}
             }
-            getHeros(heroId + 1, numberOfDownloaded + 1)
+            getRecursiveHeros(heroId + 1, numberOfDownloaded + 1)
         }
     }
 

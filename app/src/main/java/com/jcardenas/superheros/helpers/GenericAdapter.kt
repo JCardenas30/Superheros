@@ -13,19 +13,14 @@ class GenericAdapter<T : ListItemViewModel>(@LayoutRes val layoutId: Int) :
     RecyclerView.Adapter<GenericAdapter.GenericViewHolder<T>>() {
 
     private val items = mutableListOf<T>()
-    private val itemsOriginal = mutableListOf<T>()
+    private var lastSize = 0
     private var inflater: LayoutInflater? = null
     private var onListItemViewClickListener: OnListItemViewClickListener? = null
-    private var offsetMarginHorizontal = 0f
-    var widthPixel = 0
-    var heightPixel = 0
 
     fun addItems(items: List<T>) {
-        this.items.clear()
+        lastSize = this.items.size
         this.items.addAll(items)
-        this.itemsOriginal.clear()
-        this.itemsOriginal.addAll(items)
-        notifyDataSetChanged()
+        notifyItemMoved(lastSize, this.items.size)
     }
 
     fun getItem(position: Int): T? {
@@ -34,23 +29,6 @@ class GenericAdapter<T : ListItemViewModel>(@LayoutRes val layoutId: Int) :
     }
 
     fun getItems() = items
-
-    fun addItem(item: T){
-        this.items.add(item)
-        this.notifyItemInserted(items.size-1)
-    }
-
-    fun removeItem(position: Int) {
-        this.items.removeAt(position)
-        this.notifyItemRemoved(position)
-        notifyItemRangeChanged(position,items.size)
-    }
-
-    fun restoreItem(item: T, position: Int) {
-        this.items.add(position, item)
-        //notifyItemInserted(position)
-        notifyItemRangeChanged(position, this.items.size-1)
-    }
 
     fun setOnListItemViewClickListener(onListItemViewClickListener: OnListItemViewClickListener?){
         this.onListItemViewClickListener = onListItemViewClickListener
